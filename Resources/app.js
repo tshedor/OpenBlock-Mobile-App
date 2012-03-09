@@ -55,6 +55,7 @@ var feed = website+"/api/dev1/items.json?limit="+limit_value;
 //These are defined at the end of the file. They're down there cause it's easier to read.
 win.addEventListener('open', firstPreferences); //In case we haven't launched before 
 win.addEventListener('open', getPreferences); //What's up with your preferences? 
+win.addEventListener('open', checkReminderToRate); //Rate this app dude
 
 /********************************************/
 /********GLOBAL VARIABLES FOR THIS FILE******/
@@ -1066,6 +1067,45 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				Titanium.App.Properties.setString(typeData[b].slug, 'shown');
 			}
 			Ti.App.Properties.setString("appLaunch", JSON.stringify({opened:true}));
+		}
+	};
+    
+    //From https://gist.github.com/1011043
+	function checkReminderToRate() {
+		var now = new Date().getTime();
+		var remindToRate = Ti.App.Properties.getString('RemindToRate');
+		if (!remindToRate) {
+			Ti.App.Properties.setString('RemindToRate', now);
+		}
+		else if (remindToRate < now) {
+			var alertDialog = Titanium.UI.createAlertDialog({
+				title: 'Rate '+name,
+				message: 'Would you please rate the '+name+' app?',
+				buttonNames: ['OK', 'Remind Me', 'Never'],
+				cancel: 2
+			});
+			alertDialog.addEventListener('click', function(evt) {
+				switch (evt.index) {
+					case 0:
+						Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
+						// NOTE: replace this with your own iTunes link; also, this won't WON'T WORK IN THE SIMULATOR!
+						if (Ti.Android) {
+							Ti.Platform.openURL('https://market.android.com/details?id=com.larryvilleku.mobile');
+						}
+						else {
+							Ti.Platform.openURL('http://itunes.apple.com/us/app/larryvilleku/id509365461?ls=1&mt=8');
+						}
+						break;
+					case 1:
+						// "Remind Me Later"? Ok, we'll remind them tomorrow when they launch the app.
+						Ti.App.Properties.setString('RemindToRate', now + (1000 * 60 * 60 * 24));
+						break;
+					case 2:
+						Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
+						break;
+				}
+			});
+			alertDialog.show();
 		}
 	};
 
