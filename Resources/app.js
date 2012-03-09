@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 Author: Tim Shedor
 Email: editor@larryvilleku.com
-Github: http://github.com/tshedor/ob-mobile-app
+Github: http://github.com/tshedor/OpenBlock-Mobile-App
 
 One API feed, one file.
 
@@ -69,9 +69,14 @@ var title_bar_height = 55;
 var feed_view_name = 'Feed';
 var settings_view_width = 250;
 var type_view_width = 250;
+if (Titanium.Platform.osname == 'ipad') {
+	settings_view_width = 600;
+	type_view_width = 600;
+};
 var bgImage = 'images/full_bg.png';
 var phone_width = Titanium.Platform.displayCaps.platformWidth;
 var reduced_phone_width = ((Titanium.Platform.displayCaps.platformWidth) - 20);
+var double_phone_width = (phone_width + phone_width);
 
 //Close arrow appears in a few places
 var default_button_bg = 'images/transparent_bg.png';
@@ -118,6 +123,11 @@ var typeData = [
 	{ prettyName:'Police Citations', hasChild:true, slug:'police-citations', desc:'Everything from an unpaid meter to an MIP to speeding on K-10', },
 	{ prettyName:'Accidents', hasChild:true, slug:'car-accidents', desc:'Drive safely. Every accident within the city limits is mapped', },
 ];
+
+Ti.Gesture.addEventListener('orientationchange', function() {
+	phone_width = Titanium.Platform.displayCaps.platformWidth;
+	reduced_phone_width = ((Titanium.Platform.displayCaps.platformWidth) - 20);
+});
 
 /********************************************/
 /*************LOAD INFO FROM API*************/
@@ -320,7 +330,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				height:title_bar_height,
 				text:'Map',
 				textAlign:'center',
-				width:'100%',
+				width:phone_width,
 				font:{
 					fontFamily:font1,
 					fontSize:30,
@@ -377,7 +387,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			//Black to show you're in a different pane. Doesn't work on Android because opacity isn't supported in Titanium API for Android.
 			var overlay = Titanium.UI.createView({
 				backgroundColor: 'black',
-				width:'100%',
+				width:phone_width,
 				opacity:0,
 				visible:false
 			});
@@ -683,14 +693,14 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			//Have not worked too extensively with the POST API cause I'm on a deadline. So we're just going to do a webview. But in the future I plain to make this all native, no external webview			
 			var submit_view = Ti.UI.createView({
 				backgroundColor:'white',
-				width:'100%',
-				left: -800,
+				width:phone_width,
+				left: '-'+double_phone_width,
 				height: '100%',
 				top:title_bar_height,
 			});
 			
 			var submitWeb = Titanium.UI.createWebView({
-				url:website+'/accounts/login/',
+				url:website+'/neighbornews/message/new/',
 			});
 			
 			var submitClose = Titanium.UI.createButton({
@@ -705,7 +715,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
             
             submitClose.addEventListener('click', function() {
-            	submit_view.animate({left:-800,duration:300});
+            	submit_view.animate({left:'-'+double_phone_width,duration:300});
             	settings_close.visible = true;
             	submitClose.visible = false;
             	settings_title.text = 'Navigate';
@@ -726,7 +736,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			
 			//Your about view doesn't have to be crazy. This was just easier to create a webview than a bunch of misc Ti.UI properties. Don't forget to change your name, organization, and image path
 			var aboutWeb = Titanium.UI.createWebView({
-				html:'<html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"><style type="text/css"> body {font-family:"Open Sans",Arial,sans-serif;width:'+((type_view_width) - 20)+'px; margin-left:10px; margin-right:10px; font-size:16px; background:#fff; color:#555;} img {width:'+((type_view_width) - 20)+'px;height:auto} img.logo {margin-top:60px; margin-bottom:5px;} a {text-decoration:none; color:'+link_blue+'; } a.org_copyright {font-size:10px; color:inherit;} p {text-align:left; margin-botom:35px; font-size:14px; } p.developer {text-align:center; margin-bottom:60px; font-size:16px;} span.misc_head {font-size:16px; margin-top:30px; display:block; font-weight:bold; text-transform:uppercase; margin-bottom:0px} p.subset {text-align:left; font-size:12px;} p.misc_credits {margin-top:5px; text-align:left; font-size:12px; color:'+darker_grey+'}</style></head><body><a href="http://kansan.com" class="org_copyright">&copy; Copyright 2012 The University Daily Kansan</a><a href="'+website+'"><img src="'+website+'/dependencies/images/larryville_for_white.png" class="logo" /></a><br /><p class="developer">App Developed by Tim Shedor</p><p class="subset">This app uses open-source elements and is protected by the MIT license. For more information, visit the <a href="'+website+'/info/mobile.php">'+name+' mobile page</a> or this app\'s <a href="http://github.com/tshedor/larryvillekuapp">Github page</a></p><a href="'+website+'/info/credits.php" style="color:'+darker_grey+'"><span class="misc_head">Misc Credits</span></a><p class="misc_credits"><em>Fonts:</em> <a href="http://www.google.com/webfonts">Google Web Fonts</a>, <a href="http://www.theleagueofmoveabletype.com/">The League of Moveable Type</a> | <em>Map Icons:</em> <a href="http://mapicons.nicolasmollet.com">Nicolas Mollet</a> | <em>Kansan Digital and Interactive Advertising Manager:</em> <a href="mailto:adsales@kansan.com">Rebecca Ross</a></p><a href="'+website+'/info/about.php"><span class="misc_head">About</span></a><p>'+name+'.com is a map. But it\'s not the kind of map that\'s been collecting dust in the glove compartment since your mom bought it as a "present" for your 16th. It\'s a big map that shows Lawrence as the living, breathing city it is, not a sketch of roads and landmarks.</p><p>View police citations, accident reports, restaurant reviews, bar specials, commercial bargains, local events and news that your neighbors posted. Narrow that to your ZIP code, your neighborhood, your block, your street, and stay up-to-date with RSS feeds and email alerts per location.</p><p>Our goal is to provide the Lawrence community with an informative, interactive and entertaining "hyper-local" website covering news, events, discounts and deals in all neighborhoods of interest.</p><a href="'+website+'/info/policies.php"><span class="misc_head">Policies</span></a><em>Neighborhood News, Events, Deals and other Posted Items</em><br /><p>A user may not post content that includes unauthorized commercial advertising or product promotion for monetary gain. Representatives of business or commercial-gain groups should contact us through our <a href="contact.php">contact form</a> or by <a href="mailto:adsales@kansan.com">emailing our sales representative</a>.We encourage representatives of medium to large non-profit organizations to not post their events through Neighborhood News. Instead, please contact us via our <a href="'+website+'/info/contact.php">contact form</a> or by <a href="mailto:editor@larryvilleku.com">email</a> to have an event listed.</p><p>Posted content that includes, but is not limited to, harassment, personal attacks, slander, false or falsified information, hate speech, racism, words or phrases in violation of state, federal and international copyright laws is forbidden.</p><p>By posting content to '+name+'.com, the user accepts the aforementioned policy and any consequences that the posting may include. Any content that violates this policy will be removed immediately by <span class="inset_logo">LarryvilleKU</span> staff. The user may be informed of the removal retroactively, but '+name+'.com will not be obligated to contact the user in such an event. Users are encouraged to flag any content that violates this policy, or <a href="'+website+'/info/contact.php">notify us</a>.</p><em>Comments</em><br /><p><a href="'+website+'/info/philosophies.php">The goal (philosophy)</a> of '+name+'.com is to improve the Lawrence community by allowing its citizens to directly interact with each other, and we promote such civil discourse in comments appearing on item pages. We encourage thoughtful comments that spur discussion.</p><p>Discussions and comments that include, but are not limited to, harassment, personal attacks, libelous remarks, false or falsified information, obscenities, hate speech, racist remarks, commercial advertising or product promotion for profit or content in violation of state, federal and international copyright laws are forbidden.</p><p>By commenting, the user accepts full responsibility for any comment and for any consequences that may accompany said comment. Posted comments do not necessarily represent the views of '+name+'.com or The University Daily Kansan.</p><p>User comments are moderated, and any user comments that violate these policies will be removed immediately by '+name+'.com staff, which reserves the right to remove any and all comments that violate the aforemention policy. The user may be informed of the removal retroactively, but <span class="inset_logo">LarryvilleKU</span> will not be obligated to contact the user in such an event. Please flag any content that violates this policy, or <a href="'+website+'/info/contact.php">notify us</a>.</p><em>General</em><br /><p>All content on '+name+'.com is intended for personal use and is protected by Federal copyright law. By visiting this site, the user agrees to not reproduce content for commercial use or for otherwise non-personal benefit or gain without written permission of The University Daily Kansan. Unauthorized use is forbidden.</p></body></html>',
+				html:'<html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"><style type="text/css"> body {font-family:"Open Sans",Arial,sans-serif;width:'+((type_view_width) - 20)+'px; margin-left:10px; margin-right:10px; font-size:16px; background:#fff; color:#555;} img {width:'+((type_view_width) - 20)+'px;height:auto} img.logo {margin-top:60px; margin-bottom:5px;} a {text-decoration:none; color:'+link_blue+'; } a.org_copyright {font-size:10px; color:inherit;} p {text-align:left; margin-botom:35px; font-size:14px; } p.developer {text-align:center; margin-bottom:60px; font-size:16px;} span.misc_head {font-size:16px; margin-top:30px; display:block; font-weight:bold; text-transform:uppercase; margin-bottom:0px} p.subset {text-align:left; font-size:12px;} p.misc_credits {margin-top:5px; text-align:left; font-size:12px; color:'+darker_grey+'}</style></head><body><a href="http://kansan.com" class="org_copyright">&copy; Copyright 2012 The University Daily Kansan</a><a href="'+website+'"><img src="'+website+'/dependencies/images/larryville_for_white.png" class="logo" /></a><br /><p class="developer">App Developed by Tim Shedor</p><p class="subset">This app uses open-source elements and is protected by the MIT license. For more information, visit the <a href="'+website+'/info/mobile.php">'+name+' mobile page</a> or this app\'s <a href="http://github.com/tshedor/OpenBlock-Mobile-App">Github page</a></p><a href="'+website+'/info/credits.php" style="color:'+darker_grey+'"><span class="misc_head">Misc Credits</span></a><p class="misc_credits"><em>Fonts:</em> <a href="http://www.google.com/webfonts">Google Web Fonts</a>, <a href="http://www.theleagueofmoveabletype.com/">The League of Moveable Type</a> | <em>Map Icons:</em> <a href="http://mapicons.nicolasmollet.com">Nicolas Mollet</a> | <em>Kansan Digital and Interactive Advertising Manager:</em> <a href="mailto:adsales@kansan.com">Rebecca Ross</a></p><a href="'+website+'/info/about.php"><span class="misc_head">About</span></a><p>'+name+'.com is a map. But it\'s not the kind of map that\'s been collecting dust in the glove compartment since your mom bought it as a "present" for your 16th. It\'s a big map that shows Lawrence as the living, breathing city it is, not a sketch of roads and landmarks.</p><p>View police citations, accident reports, restaurant reviews, bar specials, commercial bargains, local events and news that your neighbors posted. Narrow that to your ZIP code, your neighborhood, your block, your street, and stay up-to-date with RSS feeds and email alerts per location.</p><p>Our goal is to provide the Lawrence community with an informative, interactive and entertaining "hyper-local" website covering news, events, discounts and deals in all neighborhoods of interest.</p><a href="'+website+'/info/policies.php"><span class="misc_head">Policies</span></a><em>Neighborhood News, Events, Deals and other Posted Items</em><br /><p>A user may not post content that includes unauthorized commercial advertising or product promotion for monetary gain. Representatives of business or commercial-gain groups should contact us through our <a href="contact.php">contact form</a> or by <a href="mailto:adsales@kansan.com">emailing our sales representative</a>.We encourage representatives of medium to large non-profit organizations to not post their events through Neighborhood News. Instead, please contact us via our <a href="'+website+'/info/contact.php">contact form</a> or by <a href="mailto:editor@larryvilleku.com">email</a> to have an event listed.</p><p>Posted content that includes, but is not limited to, harassment, personal attacks, slander, false or falsified information, hate speech, racism, words or phrases in violation of state, federal and international copyright laws is forbidden.</p><p>By posting content to '+name+'.com, the user accepts the aforementioned policy and any consequences that the posting may include. Any content that violates this policy will be removed immediately by <span class="inset_logo">LarryvilleKU</span> staff. The user may be informed of the removal retroactively, but '+name+'.com will not be obligated to contact the user in such an event. Users are encouraged to flag any content that violates this policy, or <a href="'+website+'/info/contact.php">notify us</a>.</p><em>Comments</em><br /><p><a href="'+website+'/info/philosophies.php">The goal (philosophy)</a> of '+name+'.com is to improve the Lawrence community by allowing its citizens to directly interact with each other, and we promote such civil discourse in comments appearing on item pages. We encourage thoughtful comments that spur discussion.</p><p>Discussions and comments that include, but are not limited to, harassment, personal attacks, libelous remarks, false or falsified information, obscenities, hate speech, racist remarks, commercial advertising or product promotion for profit or content in violation of state, federal and international copyright laws are forbidden.</p><p>By commenting, the user accepts full responsibility for any comment and for any consequences that may accompany said comment. Posted comments do not necessarily represent the views of '+name+'.com or The University Daily Kansan.</p><p>User comments are moderated, and any user comments that violate these policies will be removed immediately by '+name+'.com staff, which reserves the right to remove any and all comments that violate the aforemention policy. The user may be informed of the removal retroactively, but <span class="inset_logo">LarryvilleKU</span> will not be obligated to contact the user in such an event. Please flag any content that violates this policy, or <a href="'+website+'/info/contact.php">notify us</a>.</p><em>General</em><br /><p>All content on '+name+'.com is intended for personal use and is protected by Federal copyright law. By visiting this site, the user agrees to not reproduce content for commercial use or for otherwise non-personal benefit or gain without written permission of The University Daily Kansan. Unauthorized use is forbidden.</p></body></html>',
             	width: type_view_width,
 			});
 			
@@ -774,8 +784,8 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					settings_title.text = 'Submit'; //Change heading text
 					settings_close.visible = false; //Get rid of the other close button
 					submitClose.visible = true; //Get our close button
-					settings_title.width = '100%'; //And submit view is actually full screen, so adjust accordingly
-					settings_view.width = '100%';
+					settings_title.width = phone_width; //And submit view is actually full screen, so adjust accordingly
+					settings_view.width = phone_width;
 				}
 				if ((e.rowData.heading) === 'Refresh') {
 					actInd.show();
@@ -818,7 +828,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 						dEmailMessage.messageBody = 'Sent from the '+name+' Mobile App'; //Set body text so that when you get an email you know where it came from...unless the email user strips this text
 						//In case things go haywire...
 						dEmailMessage.addEventListener('complete',function(e) {
-    						if (e.result == emailDialog.SENT) {
+    						if (e.result == demailDialog.SENT) {
         						alert("message was sent");
     						} else {
     							alert("message was not sent. result = "+e.result);
@@ -907,12 +917,18 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 /**********NEWSITEM MORE DETAIL VIEW*********/
 
 			feed_rows.addEventListener('click',function(e) {
+				
+				var currentOrientation = Titanium.Gesture.getOrientation;
+
 				var content_view = Titanium.UI.createView({ 
 					backgroundColor:'white',
-					right: -500, //hidden (ish)
+					right: '-'+double_phone_width, //hidden (ish)
 					width: phone_width,
 					top:title_bar_height,
 				});
+				
+				content_view.orientationModes = [currentOrientation];
+
 				settings_button.visible = false;
             	//Titanium.App.Analytics.trackPageview('/mobile-app/' + e.row.type + '/detail/' + e.row.news_id);
             	//And now, for a big 'ol cluster. CSS styles defined in the head. It's a WebView because you gotta make that HTML pretty somehow, and a Text
@@ -935,7 +951,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	});
             	
             	close_content.addEventListener('click',function() {
-            		content_view.animate({right:-1200,duration:500});
+            		content_view.animate({right:'-'+double_phone_width,duration:500});
             		heading_text.text = feed_view_name;
             		win.remove(close_content);
             		settings_button.visible = true;
