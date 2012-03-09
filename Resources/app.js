@@ -55,7 +55,6 @@ var feed = website+"/api/dev1/items.json?limit="+limit_value;
 //These are defined at the end of the file. They're down there cause it's easier to read.
 win.addEventListener('open', firstPreferences); //In case we haven't launched before 
 win.addEventListener('open', getPreferences); //What's up with your preferences? 
-win.addEventListener('open', checkReminderToRate); //Rate this app dude
 
 /********************************************/
 /********GLOBAL VARIABLES FOR THIS FILE******/
@@ -736,7 +735,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			
 			//Your about view doesn't have to be crazy. This was just easier to create a webview than a bunch of misc Ti.UI properties. Don't forget to change your name, organization, and image path
 			var aboutWeb = Titanium.UI.createWebView({
-				html:'<html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"><style type="text/css"> body {font-family:"Open Sans",Arial,sans-serif;width:'+((type_view_width) - 20)+'px; margin-left:10px; margin-right:10px; font-size:16px; background:#fff; color:#555;} img {width:'+((type_view_width) - 20)+'px;height:auto} img.logo {margin-top:60px; margin-bottom:5px;} a {text-decoration:none; color:'+link_blue+'; } a.org_copyright {font-size:10px; color:inherit;} p {text-align:left; margin-botom:35px; font-size:14px; } p.developer {text-align:center; margin-bottom:60px; font-size:16px;} span.misc_head {font-size:16px; margin-top:30px; display:block; font-weight:bold; text-transform:uppercase; margin-bottom:0px} p.subset {text-align:left; font-size:12px;} p.misc_credits {margin-top:5px; text-align:left; font-size:12px; color:'+darker_grey+'}</style></head><body><a href="http://kansan.com" class="org_copyright">&copy; Copyright 2012 The University Daily Kansan</a><a href="'+website+'"><img src="'+website+'/dependencies/images/larryville_for_white.png" class="logo" /></a><br /><p class="developer">App Developed by Tim Shedor</p><p class="subset">This app uses open-source elements and is protected by the MIT license. For more information, visit the <a href="'+website+'/info/mobile.php">'+name+' mobile page</a> or this app\'s <a href="http://github.com/tshedor/OpenBlock-Mobile-App">Github page</a></p><a href="'+website+'/info/credits.php" style="color:'+darker_grey+'"><span class="misc_head">Misc Credits</span></a><p class="misc_credits"><em>Fonts:</em> <a href="http://www.google.com/webfonts">Google Web Fonts</a>, <a href="http://www.theleagueofmoveabletype.com/">The League of Moveable Type</a> | <em>Map Icons:</em> <a href="http://mapicons.nicolasmollet.com">Nicolas Mollet</a> | <em>Kansan Digital and Interactive Advertising Manager:</em> <a href="mailto:adsales@kansan.com">Rebecca Ross</a></p><a href="'+website+'/info/about.php"><span class="misc_head">About</span></a><p>'+name+'.com is a map. But it\'s not the kind of map that\'s been collecting dust in the glove compartment since your mom bought it as a "present" for your 16th. It\'s a big map that shows Lawrence as the living, breathing city it is, not a sketch of roads and landmarks.</p><p>View police citations, accident reports, restaurant reviews, bar specials, commercial bargains, local events and news that your neighbors posted. Narrow that to your ZIP code, your neighborhood, your block, your street, and stay up-to-date with RSS feeds and email alerts per location.</p><p>Our goal is to provide the Lawrence community with an informative, interactive and entertaining "hyper-local" website covering news, events, discounts and deals in all neighborhoods of interest.</p><a href="'+website+'/info/policies.php"><span class="misc_head">Policies</span></a><em>Neighborhood News, Events, Deals and other Posted Items</em><br /><p>A user may not post content that includes unauthorized commercial advertising or product promotion for monetary gain. Representatives of business or commercial-gain groups should contact us through our <a href="contact.php">contact form</a> or by <a href="mailto:adsales@kansan.com">emailing our sales representative</a>.We encourage representatives of medium to large non-profit organizations to not post their events through Neighborhood News. Instead, please contact us via our <a href="'+website+'/info/contact.php">contact form</a> or by <a href="mailto:editor@larryvilleku.com">email</a> to have an event listed.</p><p>Posted content that includes, but is not limited to, harassment, personal attacks, slander, false or falsified information, hate speech, racism, words or phrases in violation of state, federal and international copyright laws is forbidden.</p><p>By posting content to '+name+'.com, the user accepts the aforementioned policy and any consequences that the posting may include. Any content that violates this policy will be removed immediately by <span class="inset_logo">LarryvilleKU</span> staff. The user may be informed of the removal retroactively, but '+name+'.com will not be obligated to contact the user in such an event. Users are encouraged to flag any content that violates this policy, or <a href="'+website+'/info/contact.php">notify us</a>.</p><em>Comments</em><br /><p><a href="'+website+'/info/philosophies.php">The goal (philosophy)</a> of '+name+'.com is to improve the Lawrence community by allowing its citizens to directly interact with each other, and we promote such civil discourse in comments appearing on item pages. We encourage thoughtful comments that spur discussion.</p><p>Discussions and comments that include, but are not limited to, harassment, personal attacks, libelous remarks, false or falsified information, obscenities, hate speech, racist remarks, commercial advertising or product promotion for profit or content in violation of state, federal and international copyright laws are forbidden.</p><p>By commenting, the user accepts full responsibility for any comment and for any consequences that may accompany said comment. Posted comments do not necessarily represent the views of '+name+'.com or The University Daily Kansan.</p><p>User comments are moderated, and any user comments that violate these policies will be removed immediately by '+name+'.com staff, which reserves the right to remove any and all comments that violate the aforemention policy. The user may be informed of the removal retroactively, but <span class="inset_logo">LarryvilleKU</span> will not be obligated to contact the user in such an event. Please flag any content that violates this policy, or <a href="'+website+'/info/contact.php">notify us</a>.</p><em>General</em><br /><p>All content on '+name+'.com is intended for personal use and is protected by Federal copyright law. By visiting this site, the user agrees to not reproduce content for commercial use or for otherwise non-personal benefit or gain without written permission of The University Daily Kansan. Unauthorized use is forbidden.</p></body></html>',
+				html:'<html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"><style type="text/css"> body {font-family:"Open Sans",Arial,sans-serif;width:'+((type_view_width) - 20)+'px; margin-left:10px; margin-right:10px; font-size:16px; background:#fff; color:#555;} img {width:'+((type_view_width) - 20)+'px;height:auto} img.logo {margin-top:60px; margin-bottom:5px;} a {text-decoration:none; color:'+link_blue+'; } a.org_copyright {font-size:10px; color:inherit;} p {text-align:left; margin-botom:35px; font-size:14px; } p.developer {text-align:center; margin-bottom:60px; font-size:16px;} span.misc_head {font-size:16px; margin-top:30px; display:block; font-weight:bold; text-transform:uppercase; margin-bottom:0px} p.subset {text-align:left; font-size:12px;} p.misc_credits {margin-top:5px; text-align:left; font-size:12px; color:'+darker_grey+'}</style></head><body><a href="http://kansan.com" class="org_copyright">&copy; Copyright 2012 The University Daily Kansan</a><a href="'+website+'"><img src="'+website+'/dependencies/images/larryville_for_white.png" class="logo" /></a><br /><p class="developer">App Developed by Tim Shedor</p><p class="subset">This app uses open-source elements and is protected by the MIT license. For more information, visit the <a href="'+website+'/info/mobile.php">'+name+' mobile page</a> or this app\'s <a href="http://github.com/tshedor/OpenBlock-Mobile-App">Github page</a></p><a href="'+website+'/info/credits.php" style="color:'+darker_grey+'"><span class="misc_head">Misc Credits</span></a><p class="misc_credits"><em>Fonts:</em> <a href="http://www.google.com/webfonts">Google Web Fonts</a>, <a href="http://www.theleagueofmoveabletype.com/">The League of Moveable Type</a> | <em>Map Icons:</em> <a href="http://mapicons.nicolasmollet.com">Nicolas Mollet</a></p></body></html>',
             	width: type_view_width,
 			});
 			
@@ -1067,44 +1066,6 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				Titanium.App.Properties.setString(typeData[b].slug, 'shown');
 			}
 			Ti.App.Properties.setString("appLaunch", JSON.stringify({opened:true}));
-		}
-	};
-
-	function checkReminderToRate() {
-		var now = new Date().getTime();
-		var remindToRate = Ti.App.Properties.getString('RemindToRate');
-		if (!remindToRate) {
-			Ti.App.Properties.setString('RemindToRate', now);
-		}
-		else if (remindToRate < now) {
-			var alertDialog = Titanium.UI.createAlertDialog({
-				title: 'Rate '+name,
-				message: 'Would you please rate the '+name+' app?',
-				buttonNames: ['OK', 'Remind Me', 'Never'],
-				cancel: 2
-			});
-			alertDialog.addEventListener('click', function(evt) {
-				switch (evt.index) {
-					case 0:
-						Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
-						// NOTE: replace this with your own iTunes link; also, this won't WON'T WORK IN THE SIMULATOR!
-						if (Ti.Android) {
-							Ti.Platform.openURL('https://market.android.com/details?id=com.larryvilleku.mobile');
-						}
-						else {
-							Ti.Platform.openURL('http://itunes.apple.com/us/app/larryvilleku/id509365461?ls=1&mt=8');
-						}
-						break;
-					case 1:
-						// "Remind Me Later"? Ok, we'll remind them tomorrow when they launch the app.
-						Ti.App.Properties.setString('RemindToRate', now + (1000 * 60 * 60 * 24));
-						break;
-					case 2:
-						Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
-						break;
-				}
-			});
-			alertDialog.show();
 		}
 	};
 
