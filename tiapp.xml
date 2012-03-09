@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <deployment-targets>
+        <target device="mobileweb">false</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">false</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>1.8.0</sdk-version>
+    <id>com.larryvilleku.mobile</id>
+    <name>LarryvilleKU App</name>
+    <version>0.9</version>
+    <publisher>Tim Shedor</publisher>
+    <url>http://larryvilleku.com</url>
+    <description>LarryvilleKU is a hyperlocal map of news around Lawrence, KS</description>
+    <copyright>2012 by The University Daily Kansan</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>039c8157-1204-4b51-8507-f0dae91389c3</guid>
+    <property name="ti.android.google.map.api.key.development">0ZnKXkWA2dIAu2EM-OV4ZD2lJY3sEWE5TSgjJNg</property>
+    <property name="ti.android.google.map.api.key.production">0SmskXR1_Dr34dtgHu9Oo6wWlfG1Zp1xAgrs0cQ</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android>
+        <manifest android:versionCode="1" android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+            <supports-screens android:anyDensity="false"
+                android:largeScreens="true" android:normalScreens="true" android:smallScreens="false"/>
+            <tool-api-level>8</tool-api-level>
+            <uses-sdk android:minSdkVersion="7"/>
+        </manifest>
+    </android>
+    <modules/>
+</ti:app>

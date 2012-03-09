@@ -1,0 +1,195 @@
+Logfile initialized
+[INFO] logfile = /Users/Shared/LarryvilleKU App/build.log
+[DEBUG] /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/builder.py install LarryvilleKU App /Users/tshedor/Documents/App Development/Android /Users/Shared/LarryvilleKU App com.larryvilleku.mobile 7
+[INFO] Titanium SDK version: 1.8.0 (09/21/11 12:49 8f497fb...)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 3.385424 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
+[DEBUG] com.larryvilleku.mobile installed? False
+[INFO] Copying project resources..
+[INFO] Detected tiapp.xml change (or assets deleted), forcing full re-build...
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/analytics.js => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/analytics.js
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/android/appicon.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/appicon.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/android/default.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/default.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/app.js => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/app.js
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/files/map.js => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/files/map.js
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/files/scraps.js => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/files/scraps.js
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/fonts/LeagueGothic.otf => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/fonts/LeagueGothic.otf
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/fonts/Lobster.ttf => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/fonts/Lobster.ttf
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/fonts/OpenSans-Regular.ttf => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/fonts/OpenSans-Regular.ttf
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/back_arrow.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/back_arrow.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/button_active_bg.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/button_active_bg.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/button_selected_bg.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/button_selected_bg.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/full_bg.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/full_bg.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/hidden.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/hidden.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/larryville_for_white.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/larryville_for_white.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map-pin.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map-pin.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/bargains.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/bargains.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/car-accidents.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/car-accidents.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/events.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/events.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/bargains.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/bargains.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/car-accidents.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/car-accidents.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/events.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/events.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/local-news.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/local-news.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/neighbor-messages.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/neighbor-messages.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/neighborhood-messages.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/neighborhood-messages.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/photos.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/photos.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/police-citations.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/police-citations.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/restaurants.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/restaurants.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/just_icons/tweets.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/just_icons/tweets.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/local-news.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/local-news.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/neighbor-messages.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/neighbor-messages.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/photos.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/photos.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/police-citations.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/police-citations.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/restaurants.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/restaurants.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/map_icons/tweets.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/map_icons/tweets.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/red_bg.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/red_bg.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/refresh.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/refresh.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/row_bg.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/row_bg.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/settings.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/settings.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/shown.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/shown.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/transparent_bg.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/transparent_bg.png
+[TRACE] COPYING CREATED FILE: /Users/Shared/LarryvilleKU App/Resources/images/transparent_bg_selected.png => /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/images/transparent_bg_selected.png
+[TRACE] Generating Java Classes
+[DEBUG] Processing Android resource drawables
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-land-hdpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-land-hdpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-land-ldpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-land-ldpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-port-hdpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-port-hdpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-port-ldpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-port-ldpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-hdpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-land-hdpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-ldpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-land-ldpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-mdpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-land-mdpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-hdpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-port-hdpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-ldpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-port-ldpi/thumbs_2c5499c213.db
+[TRACE] COPYING FILE: /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-mdpi/Thumbs.db => /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-port-mdpi/thumbs_2c5499c213.db
+[DEBUG] app stylesheet => /Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/ApplicationStylesheet.java
+[DEBUG] copying app icon: /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/appicon.png
+[DEBUG] generating theme.xml
+[DEBUG] found drawable-long-land-hdpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-land-hdpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-land-hdpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-land-hdpi/background.png
+[DEBUG] found drawable-long-land-ldpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-land-ldpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-land-ldpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-land-ldpi/background.png
+[DEBUG] found drawable-long-port-hdpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-port-hdpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-port-hdpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-port-hdpi/background.png
+[DEBUG] found drawable-long-port-ldpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-port-ldpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-long-port-ldpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-long-port-ldpi/background.png
+[DEBUG] found drawable-notlong-land-hdpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-hdpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-hdpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-land-hdpi/background.png
+[DEBUG] found drawable-notlong-land-ldpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-ldpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-ldpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-land-ldpi/background.png
+[DEBUG] found drawable-notlong-land-mdpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-mdpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-land-mdpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-land-mdpi/background.png
+[DEBUG] found drawable-notlong-port-hdpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-hdpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-hdpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-port-hdpi/background.png
+[DEBUG] found drawable-notlong-port-ldpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-ldpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-ldpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-port-ldpi/background.png
+[DEBUG] found drawable-notlong-port-mdpi splash screen at /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-mdpi/default.png
+[DEBUG] copying /Users/Shared/LarryvilleKU App/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /Users/Shared/LarryvilleKU App/build/android/res/drawable-notlong-port-mdpi/background.png
+[DEBUG] found splash screen at /Users/Shared/LarryvilleKU App/build/android/bin/assets/Resources/default.png
+[TRACE] Writing out AndroidManifest.xml
+[DEBUG] adding /Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/ApplicationStylesheet.java to javac build list
+[DEBUG] adding /Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/LarryvillekuAppActivity.java to javac build list
+[DEBUG] adding /Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/LarryvillekuAppAppInfo.java to javac build list
+[DEBUG] adding /Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/LarryvillekuAppApplication.java to javac build list
+[DEBUG] adding /Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/R.java to javac build list
+[DEBUG] Building Java Sources: "/Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/ApplicationStylesheet.java" "/Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/LarryvillekuAppActivity.java" "/Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/LarryvillekuAppAppInfo.java" "/Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/LarryvillekuAppApplication.java" "/Users/Shared/LarryvilleKU App/build/android/gen/com/larryvilleku/mobile/R.java"
+[INFO] Compiling Android Resources... This could take some time
+[DEBUG] Android classes.dex built
+[DEBUG] creating unsigned apk: /Users/Shared/LarryvilleKU App/build/android/bin/app-unsigned.apk
+[DEBUG] from resource zip => assets/Resources/files/map.js
+[DEBUG] from resource zip => assets/Resources/files/scraps.js
+[DEBUG] from resource zip => assets/Resources/fonts/LeagueGothic.otf
+[DEBUG] from resource zip => assets/Resources/fonts/Lobster.ttf
+[DEBUG] from resource zip => assets/Resources/fonts/OpenSans-Regular.ttf
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/bargains.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/car-accidents.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/events.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/local-news.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/neighbor-messages.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/neighborhood-messages.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/photos.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/police-citations.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/restaurants.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/just_icons/tweets.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/bargains.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/car-accidents.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/events.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/local-news.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/neighbor-messages.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/photos.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/police-citations.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/restaurants.png
+[DEBUG] from resource zip => assets/Resources/images/map_icons/tweets.png
+[DEBUG] from resource zip => assets/Resources/images/back_arrow.png
+[DEBUG] from resource zip => assets/Resources/images/button_active_bg.png
+[DEBUG] from resource zip => assets/Resources/images/button_selected_bg.png
+[DEBUG] from resource zip => assets/Resources/images/full_bg.png
+[DEBUG] from resource zip => assets/Resources/images/hidden.png
+[DEBUG] from resource zip => assets/Resources/images/larryville_for_white.png
+[DEBUG] from resource zip => assets/Resources/images/map-pin.png
+[DEBUG] from resource zip => assets/Resources/images/red_bg.png
+[DEBUG] from resource zip => assets/Resources/images/refresh.png
+[DEBUG] from resource zip => assets/Resources/images/row_bg.png
+[DEBUG] from resource zip => assets/Resources/images/settings.png
+[DEBUG] from resource zip => assets/Resources/images/shown.png
+[DEBUG] from resource zip => assets/Resources/images/transparent_bg.png
+[DEBUG] from resource zip => assets/Resources/images/transparent_bg_selected.png
+[DEBUG] from resource zip => assets/Resources/analytics.js
+[DEBUG] from resource zip => assets/Resources/app.js
+[DEBUG] from resource zip => assets/Resources/appicon.png
+[DEBUG] from resource zip => assets/Resources/default.png
+[DEBUG] from resource zip => assets/tiapp.xml
+[DEBUG] from resource zip => res/drawable/appicon.png
+[DEBUG] from resource zip => res/drawable/background.png
+[DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
+[DEBUG] from resource zip => AndroidManifest.xml
+[DEBUG] from resource zip => resources.arsc
+[DEBUG] from resource zip => res/drawable-long-land-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-long-land-hdpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-long-land-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-long-land-ldpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-long-port-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-long-port-hdpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-long-port-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-long-port-ldpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-notlong-land-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-land-hdpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-notlong-land-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-land-ldpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-notlong-land-mdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-land-mdpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-notlong-port-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-port-hdpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-notlong-port-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-port-ldpi/thumbs_2c5499c213.db
+[DEBUG] from resource zip => res/drawable-notlong-port-mdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-port-mdpi/thumbs_2c5499c213.db
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/apache/Commons-NOTICE.txt
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/apache/HttpComponents-NOTICE.txt
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/apache/mime4j-NOTICE.txt
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/build.properties
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/smalljs.jar => org/mozilla/javascript/resources/Messages.properties
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/smalljs.jar => org/mozilla/javascript/resources/Messages_fr.properties
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.014180 seconds on emulator to get ready
+[INFO] Installing application on emulator
+[INFO] Application installed. Launch from drawer on Home Screen
