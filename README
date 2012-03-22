@@ -21,6 +21,7 @@ You'll also want to change your typeData (line 115) to reflect your site's schem
 
 Include your map icons in the images/map_icons folder. These must be PNG, RGB, and named exactly like the slug of the schema they represent.
 
+IMPORTANT FOR ANDROID: get your MD5 key and put it in tiapp.xml or else the map won't work. http://developer.appcelerator.com/doc/mobile/android-maps 
 Finally, shake and bake.
 
 License
