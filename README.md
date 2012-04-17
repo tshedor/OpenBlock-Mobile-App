@@ -1,6 +1,4 @@
-More to come, but I'm away from my original computer with the Git repo. So this will also be styled better.
-
-OpenBlock Mobile App
+Unofficial OpenBlock Mobile App
 ====================
 
 This is a Titanium for Mobile Project based on a the open-source project OpenBlock. 
