@@ -52,5 +52,3 @@ Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc. All Rights Reserved.
 
 Titanium is licensed under the Apache Public License (Version 2). Please
 see the LICENSE file for the full license.
-
-
