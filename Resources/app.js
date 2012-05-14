@@ -53,8 +53,8 @@ var name = 'LarryvilleKU';
 var feed = website+"/api/dev1/items.json?limit="+limit_value;
 
 //These are defined at the end of the file. They're down there cause it's easier to read.
-win.addEventListener('open', firstPreferences); //In case we haven't launched before 
 win.addEventListener('open', checkReminderToRate); //Rate this app dude
+win.addEventListener('open', firstPreferences); //In case we haven't launched before 
 
 /********************************************/
 /********GLOBAL VARIABLES FOR THIS FILE******/
@@ -79,7 +79,7 @@ var double_phone_width = (phone_width + phone_width);
 
 //Close arrow appears in a few places
 var default_button_bg = 'images/transparent_bg.png';
-var default_button_selected = 'images/transparent_bg_selected.png';
+var default_button_selected = '';
 var default_left_arrow = 'images/back_arrow.png';
 var default_close_dimensions = '30';
 var default_close_from_top = '15';
@@ -110,7 +110,7 @@ if(Ti.Platform.osname=='android') {
    font3 = 'OpenSans-Regular';
 }  
 
-//This table generates content for the Legend and the View Options page. Very important that your slug matches your slug on your OB type.
+//This table generates content for the Legend and the Preferences page. Very important that your slug matches your slug on your OB type.
 var typeData = [
 	{ prettyName:'Neighborhood News', hasChild:true, slug:'neighborhood-messages', desc:'Community stories from you or the grouch next door', },
 	{ prettyName:'Bargains', hasChild:true, slug:'bargains', desc: 'You will know where awesome deals are going to be.', },
@@ -383,8 +383,8 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				backgroundImage:bgImage,
 				width:type_view_width,
 				left: '-'+type_view_width,
-				height: '100%',
 				top:title_bar_height,
+				bottom:0,
 			});
 			
 			//Black to show you're in a different pane. Doesn't work on Android because opacity isn't supported in Titanium API for Android.
@@ -433,7 +433,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				{ heading:feed_view_name, event:'map', hasChild:true, newwin:false, },
 				{ heading:'Submit', event:'map', hasChild:true, newwin:true, },
 				{ heading:'Refresh', event:'map', hasChild:true, newwin:false, },
-				{ heading:'View Options', event:'map', hasChild:true, newwin:false, },
+				{ heading:'Preferences', event:'map', hasChild:true, newwin:false, },
 				{ heading:'Legend', event:'map', hasChild:true, newwin:false, },
 				{ heading:'About & Policies', event:'map', hasChild:true, newwin:true, },
 				{ heading:'Contact & Feedback', event:'map', hasChild:true, newwin:true, },
@@ -478,7 +478,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				top:title_bar_height,
 			});
 			
-/*****VIEW OPTIONS PANE/TYPE_VIEW*********/
+/*****Preferences PANE/TYPE_VIEW*********/
 
 			//Same technique from before in the settings table view http://cssgallery.info/custom-row-for-tableview-in-appcelerator-titanium/
 			typeArray = [];						
@@ -501,13 +501,6 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				});
 				
 				var typeStatus = Titanium.App.Properties.getString(typeData[t].slug); //This is set upon row click. Listener is later
-
-				var typeStatusImage = Titanium.UI.createImageView({
-					image: 'images/'+typeStatus+'.png',
-					left:5,
-					height:18,
-					width:18,
-				});
 				
 				var typeIcon = Titanium.UI.createImageView({
 					image: 'images/map_icons/just_icons/'+typeData[t].slug+'.png', //This is why settings image names to the same as slug is important
@@ -517,11 +510,11 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				});
 				
 				typeStatus[t] = typeData[t].slug;
-				typeRow.add(typeStatusImage);
 				typeRow.add(typeIcon);
 				typeRow.add(typeHeading);
 				typeRow.hasChild=false;
- 				
+ 				typeRow.leftImage = 'images/'+typeStatus+'.png';	
+ 				 				
 				typeRow.className = 'typeRow';
  				typeRow.heading = typeData[t].heading;
 
@@ -535,18 +528,6 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				typeRow.backgroundColor = typeRow.backgroundColor;
 				typeRow.id = t;
 			};
-						
-			//The feed won't changes unless you reload it. Also, on reload, the StatusImage icons will update
-			var typeRefresh = Titanium.UI.createButton({
-				image: 'images/refresh.png',
-				backgroundImage: default_button_bg,
-				backgroundSelectedImage: default_button_selected,
-				right:10,
-				height:default_close_dimensions,
-				width:default_close_dimensions,
-				top:default_close_from_top,
-				visible:false,
-			});
 			
 			//Y'all seen this before
 			var typeClose = Titanium.UI.createButton({
@@ -564,11 +545,35 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	type_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	typeClose.visible = false;
-            	typeRefresh.visible = false;
             	settings_title.text = 'Navigate';
             });
+            
+            var typeSave = Titanium.UI.createButton({
+				bottom:0,
+				height:title_bar_height,
+				width:'100%',
+				backgroundImage: bgImage,
+				backgroundSelectedImage: default_button_selected,
+				borderWidth: 0,
+				borderColor: 'transparent',
+            });
+           	
+			var typeSaveText = Titanium.UI.createLabel({
+				shadowColor: shadow_color,
+				shadowOffset: shadow_offset,
+				color:'#fff',
+				height:title_bar_height,
+				text:'Save',
+				textAlign:'center',
+				width:phone_width,
+				font:{
+					fontFamily:font1,
+					fontSize:30,
+				}
+			});
+			typeSave.add(typeSaveText);
             			
-			typeRefresh.addEventListener('click',function() {
+			typeSave.addEventListener('click',function() {
 				actInd.show();
 					setTimeout(function() {
 						actInd.hide();
@@ -577,6 +582,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
                 xhr.open("GET",feed);
  				xhr.send();
 			});
+			type_view.add(typeSave);
 
 			var typeTable = Titanium.UI.createTableView({
 				width:type_view_width,
@@ -592,12 +598,12 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			typeTable.addEventListener('click',function(e) {
 				if (Titanium.App.Properties.getString(e.rowData.slug) === 'hidden') {
 					Titanium.App.Properties.setString(e.rowData.slug, 'shown')
-					e.rowData.backgroundColor = '#75ee6c'; //Changes to green to signify it's shown
+					e.rowData.leftImage = 'images/shown.png'; //Changes to red to signify it's hidden
 					feed += '&type='+e.rowData.slug; //Change the feed to include the slug
 					Titanium.App.Analytics.trackPageview('/view-options/'+e.rowData.slug+'shown'); //Fire analytics listener. From a customer service standpoint, to know what people  do like to see on their map.
 				} else {
 					Titanium.App.Properties.setString(e.rowData.slug, 'hidden');
-					e.rowData.backgroundColor = '#e87081'; //Changes to red to signify it's hidden
+					e.rowData.leftImage = 'images/hidden.png'; //Changes to red to signify it's hidden
 					feed = feed.replace(('&type='+e.rowData.slug),''); //Change the feed to include the slug
 					Titanium.App.Analytics.trackPageview('/view-options/'+e.rowData.slug+'hidden'); //Fire analytics listener. From a customer service standpoint, to know what people don't like to see on their map.
 				};
@@ -661,7 +667,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				height: '100%',
 				top:title_bar_height,
 			});
-			
+
 			var legendTable = Titanium.UI.createTableView({
 				data:legendData,
 				rowHeight:120,
@@ -799,14 +805,13 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
                 	xhr.open("GET",feed);
  					xhr.send();
 				}
-				if ((e.rowData.heading) === 'View Options') {
+				if ((e.rowData.heading) === 'Preferences') {
 					type_view.animate({left:0,duration:300}); //See notations under 'Submit'
 					settings_view.animate({left:0,duration:300});
 					overlay.animate({opacity:0.6,duration:300});
-					settings_title.text = 'View Options';
+					settings_title.text = 'Preferences';
 					settings_close.visible = false;
 					typeClose.visible = true;
-					typeRefresh.visible = true;
   				}
 				if ((e.rowData.heading) === 'Legend') {
 					legend_view.animate({left:0,duration:300}); //See notations under 'Submit'
@@ -855,7 +860,6 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			
 			//The close buttons need to be added separately and not to their respective views. Cause those views are set off from the top.
 			settings_view.add(typeClose);
-			settings_view.add(typeRefresh);
 			settings_view.add(legendClose);
 			settings_view.add(submitClose);
 			settings_view.add(aboutClose);
@@ -1054,17 +1058,162 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	//If the app is opening for the first time, set preferences because the app will crash otherwise when it queries the Titanium properties on ViewOptions (type_view). 
 	//Learned from the comment on the first answer by Ravi http://developer.appcelerator.com/question/132802/check-if-the-app-is-running-on-the-first-time 
 	function firstPreferences() {
-		var opened = Ti.App.Properties.getString('appLaunch');
+		var opened = Ti.App.Properties.getString('appLaunch5');
+			var heading_bar = Titanium.UI.createView({
+				top:0,
+				height:title_bar_height,
+				backgroundImage:bgImage,
+			});
+           	
+           	//heading_text.text will be overwritten periodically....
+			var heading_text = Titanium.UI.createLabel({
+				shadowColor: shadow_color,
+				shadowOffset: shadow_offset,
+				color:'#fff',
+				height:title_bar_height,
+				text:'Preferences',
+				textAlign:'center',
+				width:phone_width,
+				font:{
+					fontFamily:font1,
+					fontSize:30,
+				}
+			});
+
+            var save_bar = Titanium.UI.createButton({
+				bottom:0,
+				height:title_bar_height,
+				width:'100%',
+				backgroundImage: bgImage,
+				backgroundSelectedImage: default_button_selected,
+				borderWidth: 0,
+				borderColor: 'transparent',
+            });
+           	
+			var save_text = Titanium.UI.createLabel({
+				shadowColor: shadow_color,
+				shadowOffset: shadow_offset,
+				color:'#fff',
+				height:title_bar_height,
+				text:'Save',
+				textAlign:'center',
+				width:phone_width,
+				font:{
+					fontFamily:font1,
+					fontSize:30,
+				}
+			});
+			save_bar.add(save_text);
 		//Blank response if it's already been opened
-		if(opened) { 
-		} else {
-			for (var b=0; b < typeData.length; b++) {
+		if(opened){} else {
+						for (var b=0; b < typeData.length; b++) {
 				Titanium.App.Properties.setString(typeData[b].slug, 'shown');
 			}
-			Ti.App.Properties.setString("appLaunch", JSON.stringify({opened:true}));
+			var first_settings_window = Titanium.UI.createWindow({navBarHidden:true,});
+			
+			heading_bar.add(heading_text);
+			first_settings_window.add(heading_bar);
+			first_settings_window.add(save_bar);
+
+			prefArray = [];	
+
+			var pref_about_text = Ti.UI.createLabel({
+				text:'Decide which news you want to see. After all, it is your city, too.',
+				font: {
+					fontFamily:font3, 
+					fontSize:16,
+				}, 
+				color: darker_grey,
+				top:title_bar_height,
+				height:title_bar_height,
+			});
+			first_settings_window.add(pref_about_text);
+						
+			for (var p = 0; p < typeData.length; p++) {
+				var prefPrettyName = typeData[p].prettyName;
+								
+				var prefRow = Titanium.UI.createTableViewRow();
+
+				var prefHeading =  Titanium.UI.createLabel({
+					text:prefPrettyName.toUpperCase(), //.toUpperCase() is not necessary, I only did it because I'm using League and it looks bad when it's just lowercase
+					font:{
+						fontFamily:font2,
+						fontSize:24,
+					},
+					width:'auto',
+					left:90,
+					textAlign:'left',
+					color:col2
+				});
+				
+				if(!(Titanium.App.Properties.getString(typeData[p].slug))) {
+					Titanium.App.Properties.setString(typeData[p].slug, 'shown');
+				}
+				
+				var prefStatus = Titanium.App.Properties.getString(typeData[p].slug); //This is set upon row click. Listener is later
+				
+				var prefIcon = Titanium.UI.createImageView({
+					image: 'images/map_icons/just_icons/'+typeData[p].slug+'.png',  //This is why settings image names to the same as slug is important
+					left:40,
+					width:30,
+					height:30,
+				});
+				
+				prefStatus[p] = typeData[p].slug;
+				//prefRow.add(prefStatusImage);
+				prefRow.add(prefIcon);
+				prefRow.add(prefHeading);
+				prefRow.hasChild=false;
+ 				prefRow.leftImage = 'images/'+prefStatus+'.png';	
+
+				prefRow.className = 'prefRow';
+ 				prefRow.heading = typeData[p].heading;
+
+				prefArray.push(prefRow);
+				
+				prefArray[p] = prefRow;
+				prefRow.backgroundColor = 'white';
+				
+				//So that the event listener can adjust properties
+				prefRow.slug = typeData[p].slug;
+				prefRow.backgroundColor = prefRow.backgroundColor;
+				prefRow.id = p;
+			};
+			
+			var prefTable = Titanium.UI.createTableView({
+				width:'100%',
+				data:prefArray,
+				minRowHeight:58,
+				color:col1,
+				rowBackgroundColor:'white',
+				backgroundColor:'white',
+				top:title_bar_height+title_bar_height,
+				bottom:title_bar_height,
+			});
+			
+			prefTable.addEventListener('click',function(e) {
+				if (Titanium.App.Properties.getString(e.rowData.slug) === 'hidden') {
+					Titanium.App.Properties.setString(e.rowData.slug, 'shown')
+					e.rowData.leftImage = 'images/shown.png'; //Changes to red to signify it's hidden
+					feed += '&type='+e.rowData.slug; //Change the feed to include the slug
+					Titanium.App.Analytics.trackPageview('/view-options/'+e.rowData.slug+'-shown'); //Fire analytics listener. From a customer service standpoint, to know what people  do like to see on their map.
+				} else {
+					Titanium.App.Properties.setString(e.rowData.slug, 'hidden');
+					e.rowData.leftImage = 'images/hidden.png'; //Changes to red to signify it's hidden
+					feed = feed.replace(('&type='+e.rowData.slug),''); //Change the feed to include the slug
+					Titanium.App.Analytics.trackPageview('/view-options/'+e.rowData.slug+'-hidden'); //Fire analytics listener. From a customer service standpoint, to know what people don't like to see on their map.
+				};
+			});
+			first_settings_window.add(prefTable);
+            first_settings_window.open({modal:true});
+			Ti.App.Properties.setString('GPSPref', 'yes');
+			save_bar.addEventListener('click',function() {
+				Ti.App.Properties.setString("appLaunch5", JSON.stringify({opened:true}));
+				first_settings_window.close();
+			});
 		}
 	};
-    
+
     //From https://gist.github.com/1011043
 	function checkReminderToRate() {
 		var now = new Date().getTime();
