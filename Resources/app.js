@@ -65,7 +65,7 @@ var feed_toolbar_image_height = 35;
 var feed_toolbar_image_width = 35;
 var feed_toolbar_image_bottom = 2;
 var title_bar_height = 55;
-var feed_view_name = 'Feed';
+var feed_view_name = 'Your News';
 var settings_view_width = 250;
 var type_view_width = 250;
 if (Titanium.Platform.osname == 'ipad') {
@@ -425,6 +425,13 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
            		overlay.animate({opacity:0,delay:100,duration:300});
            		settings_view.animate({left:'-'+settings_view_width,duration:300});
            	});
+           	
+           	//Log this so that we have better Android capabilities. The back button works just like the back arrow at the top.
+			settings_view.addEventListener('android:back',function() {
+           		overlay.visible = false;
+           		overlay.animate({opacity:0,delay:100,duration:300});
+           		settings_view.animate({left:'-'+settings_view_width,duration:300});			
+			});
 			
 			//Learned how from http://cssgallery.info/custom-row-for-tableview-in-appcelerator-titanium/
 			//Create the source data
@@ -438,6 +445,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				{ heading:'About & Policies', event:'map', hasChild:true, newwin:true, },
 				{ heading:'Contact & Feedback', event:'map', hasChild:true, newwin:true, },
 			];
+
 			settings = []; //Empty feed we'll push into
 			
 			//Set up the variables for each item in the source of settings
@@ -447,7 +455,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					text:settingsData[c].heading.toUpperCase(),
 					font:{
 						fontFamily:font2,
-						fontSize:35,
+						fontSize:32,
 					},
 					width:'auto',
 					left:5,
@@ -471,7 +479,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			var settingsTable = Titanium.UI.createTableView({
 				width:settings_view_width,
 				data:settings,
-				minRowHeight:58,
+				minRowHeight:50,
 				color:col1,
 				rowBackgroundColor:'white',
 				backgroundColor:'white',
@@ -547,7 +555,15 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	typeClose.visible = false;
             	settings_title.text = 'Navigate';
             });
-            
+
+           	//And again, adding Android functions
+			type_view.addEventListener('android:back',function() {
+            	type_view.animate({left:'-'+type_view_width,duration:300});
+            	settings_close.visible = true;
+            	typeClose.visible = false;
+            	settings_title.text = 'Navigate';		
+			});
+			        
             var typeSave = Titanium.UI.createButton({
 				bottom:0,
 				height:title_bar_height,
@@ -695,6 +711,15 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	legendClose.visible = false;
             	settings_title.text = 'Navigate';
             });
+            
+            //ANDROID
+			legend_view.addEventListener('android:back',function() {
+            	legend_view.animate({left:'-'+type_view_width,duration:300});
+            	settings_close.visible = true;
+            	legendClose.visible = false;
+            	settings_title.text = 'Navigate';	
+			});
+			
 			legend_view.add(legendTable);
 			
 /*****SUBMIT VIEW*********/
@@ -731,6 +756,17 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	settings_view.width = settings_view_width;
             	settings_title.width = settings_view_width;
             });
+            
+            //DROID
+			submit_view.addEventListener('android:back',function() {
+            	submit_view.animate({left:'-'+double_phone_width,duration:300});
+            	settings_close.visible = true;
+            	submitClose.visible = false;
+            	settings_title.text = 'Navigate';
+            	settings_view.width = settings_view_width;
+            	settings_title.width = settings_view_width;	
+			});
+			
             submit_view.add(submitWeb);
 			
 /*****ABOUT VIEW/HELP*********/
@@ -766,6 +802,14 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	aboutClose.visible = false;
             	settings_title.text = 'Navigate';
             });
+            
+            //BACK ARROW FOR ANDROID
+			about_view.addEventListener('android:back',function() {
+            	about_view.animate({left:'-'+type_view_width,duration:300});
+            	settings_close.visible = true;
+            	aboutClose.visible = false;
+            	settings_title.text = 'Navigate';
+			});
             
             about_view.add(aboutWeb);
 
@@ -804,6 +848,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					annotations = [];
                 	xhr.open("GET",feed);
  					xhr.send();
+ 					Ti.API.info(feed);
 				}
 				if ((e.rowData.heading) === 'Preferences') {
 					type_view.animate({left:0,duration:300}); //See notations under 'Submit'
@@ -925,23 +970,44 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 
 			feed_rows.addEventListener('click',function(e) {
 
-				settings_button.visible = false;
             	//Titanium.App.Analytics.trackPageview('/mobile-app/' + e.row.type + '/detail/' + e.row.news_id);
-            	//And now, for a big 'ol cluster. CSS styles defined in the head. It's a WebView because you gotta make that HTML pretty somehow, and a Text
+            	//And now, for a big 'ol cluster. CSS styles defined in the head. It's a WebView because you gotta make that HTML pretty somehow
             	var actual_content = Ti.UI.createWebView({
+            		top:title_bar_height,
             		width: phone_width,
             		bottom:map_detail_height, //Only appears on iOS,
-            		html:'<html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"><style type="text/css"> body {font-family:"Open Sans",Arial,sans-serif; width:'+reduced_phone_width+'px; font-size:16px;} img {width:'+reduced_phone_width+'px; height:auto} h3.mobile_app_only {color:'+col1+'; font-family:"Lobster",Arial,sans-serif; font-weight:normal; font-size:28px;} a {text-decoration:none;}</style></head><body><a href="'+website+'/'+e.row.type+'/detail/'+e.row.news_id+'"><h3 class="mobile_app_only">' + e.row.heading + '</h3></a>' + e.row.content + '</body></html>'
+            		html:'<html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"><style type="text/css"> body {font-family:"Open Sans",Arial,sans-serif; width:'+reduced_phone_width+'px; font-size:16px;} img {width:'+reduced_phone_width+'px; height:auto} h3.mobile_app_only {color:'+col1+'; font-family:"Open Sans",Arial,sans-serif; font-weight:normal; font-size:22px;} a {text-decoration:none;}</style></head><body><a href="'+website+'/'+e.row.type+'/detail/'+e.row.news_id+'"><h3 class="mobile_app_only">' + e.row.heading + '</h3></a>' + e.row.content + '</body></html>'
             	});
 
 				Titanium.App.Analytics.trackPageview('/detail-view/'+e.row.heading); //Fire analytics listener
             	
             	var detail_window = Ti.UI.createWindow({
-            		top:55,
             		navBarHidden:true,
             	});
             	
-            	heading_text.text = 'Detail';            	
+          		//Going to have to recreate the heading bar we've been failling back on for this unique modal window
+				var detail_bar = Titanium.UI.createView({
+					top:0,
+					height:title_bar_height,
+					backgroundImage:bgImage,
+				});
+           		
+           		//Same for the text...
+				var detail_text = Titanium.UI.createLabel({
+					shadowColor: shadow_color,
+					shadowOffset: shadow_offset,
+					color:'#fff',
+					height:title_bar_height,
+					text:'Detail',
+					textAlign:'center',
+					width:phone_width,
+					font:{
+						fontFamily:font1,
+						fontSize:30,
+					}
+				});
+				detail_bar.add(detail_text);
+            	detail_window.add(detail_bar);
 				detail_window.add(actual_content);
             	
             	var detail_close = Titanium.UI.createButton({
@@ -956,12 +1022,17 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             	
             	detail_close.addEventListener('click',function() {
                 	detail_window.close();
+            	});
+            	
+            	//And the android:back button we've come to know and love again
+				detail_window.addEventListener('android:back',function() {
+                	detail_window.close();
             		heading_text.text = feed_view_name;
             		settings_button.visible = true;
             		win.remove(detail_close);
-            	});
+				});
             	
-            	//Again, Android can only display one mapview per app
+            	//Again, Android can only display one mapview per app. Note: (!Ti.Android) does not always work for me, hence the empty brackets
             	if (Ti.Android) { } else {	
 					var detail_mrker = Titanium.Map.createAnnotation({
 						latitude:e.row.location[1],
@@ -990,8 +1061,8 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				
 					detail_window.add(detail_mapview);
 				};
-				win.add(detail_close);
-            	detail_window.open();
+				detail_bar.add(detail_close);
+            	detail_window.open({modal:true});
        		});
        		
        		//The feed view holds the items from the JSON query we made early, but it displays it as a list and not as a series of map points. It's a view because working with Titanium windows confuse me and Views are more easily animated.
@@ -1039,6 +1110,112 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			alert(E);
 		}
 	};
+	
+/********************************************/
+/************* NOTIFICATIONS ****************/
+/********************************************/	
+
+//So here's where we start having fun. Notifications were introduced from Titanium in their ACS service with the 2.0 SDK. And amazingly, they work. It's the first time I've ever used a notification service and it's actually worked in Titanium. That said, it's not well documented and there aren't many examples to use. However, after skimming forums and documentation for several hours, I Frankensteined code snippets that worked and inserted them here. I'll walk through it.
+
+//First, iOS has a completely different setup. So we're going to split this in two for right now. Down the road, I hope to merge these so there isn't as much duplicate code.
+//You're going to have to create a new app for this as well, and set Enable Cloud Services when you create it. Keep your package name and everthing, copy ONLY NECESSARY bits from your old tiapp.xml. Then copy the rest of your resources folder. In your ACS Console, click Manage next to the App, then Settings, and enter the package name for Production AND Development
+if(Ti.Android) {
+	
+	//You need that module for Android. Check out the tiapp.xml modules section to see how to insert it.
+	var CloudPush = require('ti.cloudpush');
+        //CloudPush.debug = true;
+        CloudPush.enabled = true; //DUH
+    var deviceToken //The unique Identifier for the device. 
+    
+    var Cloud = require('ti.cloud'); //Another module. iOS needs this too.
+        //Cloud.debug = true;
+ 
+	CloudPush.retrieveDeviceToken({
+        success: function deviceTokenSuccess(e) {
+            //alert('Device Token: ' + e.deviceToken);
+            deviceToken = e.deviceToken //So here we have to get the deviceToken to identify one device from another so you don't send a push to just one device.
+            loginDefault(); //See function below
+        },
+        error: function deviceTokenError(e) {
+            alert('Failed to register for push! ' + e.error);
+        }
+    });
+ 
+	function loginDefault(e){ //ACS requires that all users login. Whack, I know, but it's the policy for now.
+        Cloud.Users.login({ //Going to create just a regular, default user, and they're going to collect all the device tokens. Each token is another subscriber, so it's not bending the rules, this just makes it easier for users so they don't have to create an account for the app/notifications
+            login: 'test@example.com',
+            password: 'example_password' //Create this user for Production AND Development under ACS Console > Manage > Users > Add User
+        }, function (e) {
+            if (e.success) {
+                defaultSubscribe(); //See function below
+            } else {
+                alert('Error:\\n' +((e.error && e.message) || JSON.stringify(e)));
+            }
+        });
+    }
+ 
+    function defaultSubscribe(){
+        Cloud.PushNotifications.subscribe({ //Now that we've logged in, submit the data to ACS
+        	channel: 'larryville_news',
+        	device_token: deviceToken,
+        	type: 'android' //A must, for whatever reason. Took me forever to figure this out, because it only throws an error when you install to device, not in the emulator. Type as a requirement is also not specified in the Titanium docs, just in their REST API/iOS SDK/Java SDK/JS SDK docs.
+        }, function (e) {
+        	if (e.success) {
+        		//alert('Subscribed');
+        	} else {
+        		alert('Error:' +((e.error && e.message) || JSON.stringify(e)));
+        	}
+        });
+    }
+    
+    function defaultUnsubscribe(){
+    	Cloud.PushNotifications.unsubscribe({ //From the event listener above to remove the user from the list.
+                channel: 'larryville_news',
+                device_token: deviceToken,
+        		type: 'android'
+            }, function (e) {
+                if (e.success) {
+                    alert('Unsubscribed.');
+                } else {
+                    alert('Error:' +((e.error && e.message) || JSON.stringify(e)));
+                }
+            });
+    }
+ 
+ //The worst. This was a mountain of pain. So once we're all signed up, we've got to receive and parse the message. Moving on.
+	CloudPush.addEventListener('callback', function (evt) {
+		data = JSON.parse(evt.payload); //Your evt is total response text. We're going to just narrow this to the payload value, because I don't care about the rest. You can alert(evt) if you're so interested. Then we convert the JSON data into something readable.
+	
+		if(data.android.vibrate){ //if the vibrate property exists, then shake.
+			Titanium.Media.vibrate();	
+		}
+
+		Titanium.Android.NotificationManager.notify( //An undocumented feature of the API, this is actually massively important to render notifications in the status bar.
+			0,
+			Ti.Android.createNotification({
+				contentTitle: "LarryvilleKU: " + data.android.title, //The title
+				contentText: data.android.alert, //The alert itself
+				tickerText: data.android.alert, //What shows up in the bar upon first receiving notification (just duplicating the alert here)
+				icon : Ti.App.Android.R.drawable.appicon, //the appicon to appear in the bar/when it's 'minimized'
+				flags : Titanium.Android.ACTION_DEFAULT | Titanium.Android.FLAG_AUTO_CANCEL | Titanium.Android.FLAG_SHOW_LIGHTS,
+				contentIntent: Titanium.Android.createPendingIntent({
+					intent: Titanium.Android.createIntent({
+						url: 'app.js' //When you click on the notification, open the app
+					})
+				})
+			})
+		)
+    });
+    
+    
+    //Lastly, for debugging purposes
+    CloudPush.addEventListener('trayClickLaunchedApp', function (evt) {
+        Ti.API.info('Tray Click Launched App (app was not running)');
+    });
+    CloudPush.addEventListener('trayClickFocusedApp', function (evt) {
+        Ti.API.info('Tray Click Focused App (app was already running)');
+    });
+}
 
 /********************************************/
 /***MISC FUNCTIONS SET ON WIN.OPEN AT TOP****/
@@ -1059,13 +1236,13 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	//Learned from the comment on the first answer by Ravi http://developer.appcelerator.com/question/132802/check-if-the-app-is-running-on-the-first-time 
 	function firstPreferences() {
 		var opened = Ti.App.Properties.getString('appLaunch5');
+		//We're eventually launching a window, so we have to recreate the heading bar seen elsewhere in the app
 			var heading_bar = Titanium.UI.createView({
 				top:0,
 				height:title_bar_height,
 				backgroundImage:bgImage,
 			});
            	
-           	//heading_text.text will be overwritten periodically....
 			var heading_text = Titanium.UI.createLabel({
 				shadowColor: shadow_color,
 				shadowOffset: shadow_offset,
@@ -1080,6 +1257,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				}
 			});
 
+			//At the bottom, to make this intuitive, we're adding a Save button so users believe their preferences are saved. Also, the save button sets a Properties string so this window doesn't have to come up again
             var save_bar = Titanium.UI.createButton({
 				bottom:0,
 				height:title_bar_height,
@@ -1104,12 +1282,12 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				}
 			});
 			save_bar.add(save_text);
-		//Blank response if it's already been opened
+		//Blank response if it's already been opened. Again, (!opened) is inconsistent for me.
 		if(opened){} else {
-						for (var b=0; b < typeData.length; b++) {
-				Titanium.App.Properties.setString(typeData[b].slug, 'shown');
+			for (var b=0; b < typeData.length; b++) {
+				Titanium.App.Properties.setString(typeData[b].slug, 'shown'); //Set this as the default
 			}
-			var first_settings_window = Titanium.UI.createWindow({navBarHidden:true,});
+			var first_settings_window = Titanium.UI.createWindow({navBarHidden:true,}); //Using a window for stability's sake
 			
 			heading_bar.add(heading_text);
 			first_settings_window.add(heading_bar);
@@ -1117,6 +1295,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 
 			prefArray = [];	
 
+			//A brief description
 			var pref_about_text = Ti.UI.createLabel({
 				text:'Decide which news you want to see. After all, it is your city, too.',
 				font: {
@@ -1124,11 +1303,14 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					fontSize:16,
 				}, 
 				color: darker_grey,
+				left:10,
+				right:8,
 				top:title_bar_height,
 				height:title_bar_height,
 			});
 			first_settings_window.add(pref_about_text);
-						
+			
+			//This is all basically taken from the first preferences setting view we set up (typeTable)			
 			for (var p = 0; p < typeData.length; p++) {
 				var prefPrettyName = typeData[p].prettyName;
 								
@@ -1160,7 +1342,6 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				});
 				
 				prefStatus[p] = typeData[p].slug;
-				//prefRow.add(prefStatusImage);
 				prefRow.add(prefIcon);
 				prefRow.add(prefHeading);
 				prefRow.hasChild=false;
@@ -1183,7 +1364,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			var prefTable = Titanium.UI.createTableView({
 				width:'100%',
 				data:prefArray,
-				minRowHeight:58,
+				minRowHeight:48,
 				color:col1,
 				rowBackgroundColor:'white',
 				backgroundColor:'white',
@@ -1194,21 +1375,21 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			prefTable.addEventListener('click',function(e) {
 				if (Titanium.App.Properties.getString(e.rowData.slug) === 'hidden') {
 					Titanium.App.Properties.setString(e.rowData.slug, 'shown')
-					e.rowData.leftImage = 'images/shown.png'; //Changes to red to signify it's hidden
+					e.rowData.leftImage = 'images/shown.png'; //Changes to green check to show it's visible
 					feed += '&type='+e.rowData.slug; //Change the feed to include the slug
 					Titanium.App.Analytics.trackPageview('/view-options/'+e.rowData.slug+'-shown'); //Fire analytics listener. From a customer service standpoint, to know what people  do like to see on their map.
 				} else {
 					Titanium.App.Properties.setString(e.rowData.slug, 'hidden');
-					e.rowData.leftImage = 'images/hidden.png'; //Changes to red to signify it's hidden
+					e.rowData.leftImage = 'images/hidden.png'; //Changes to red x to signify it's hidden
 					feed = feed.replace(('&type='+e.rowData.slug),''); //Change the feed to include the slug
 					Titanium.App.Analytics.trackPageview('/view-options/'+e.rowData.slug+'-hidden'); //Fire analytics listener. From a customer service standpoint, to know what people don't like to see on their map.
 				};
 			});
 			first_settings_window.add(prefTable);
             first_settings_window.open({modal:true});
-			Ti.App.Properties.setString('GPSPref', 'yes');
 			save_bar.addEventListener('click',function() {
-				Ti.App.Properties.setString("appLaunch5", JSON.stringify({opened:true}));
+				Ti.App.Properties.setString("appLaunch5", JSON.stringify({opened:true})); //So we don't see this first prefences window again
+				//Ti.App.Properties.setString('GPSPref', 'yes'); Note: this is a preference I need to build in down the line
 				first_settings_window.close();
 			});
 		}
