@@ -23,30 +23,32 @@ THE SOFTWARE.
 */
 
 (function() {
-  var initializing = false, fnTest = /xyz/.test(function() {
-    var xyz;
-  }) ? /\b_super\b/ : /.*/;
-  // The base Class implementation (does nothing)
-  this.AnalyticsBase = function() {
-  };
+    var initializing = false;
 
-  // Create a new Class that inherits from this class
-  AnalyticsBase.extend = function(prop) {
-    var _super = this.prototype;
+    var fnTest = /xyz/.test(() => {
+      var xyz;
+    }) ? /\b_super\b/ : /.*/;
 
-    // Instantiate a base class (but only create the instance,
-    // don't run the init constructor)
-    initializing = true;
-    var prototype = new this();
-    initializing = false;
+    // The base Class implementation (does nothing)
+    this.AnalyticsBase = () => {
+    };
 
-    // Copy the properties over onto the new prototype
-    for (var name in prop) {
-      // Check if we're overwriting an existing function
-      prototype[name] = typeof prop[name] == "function" &&
-          typeof _super[name] == "function" && fnTest.test(prop[name]) ?
-          (function(name, fn) {
-            return function() {
+    // Create a new Class that inherits from this class
+    AnalyticsBase.extend = function(prop) {
+      var _super = this.prototype;
+
+      // Instantiate a base class (but only create the instance,
+      // don't run the init constructor)
+      initializing = true;
+      var prototype = new this();
+      initializing = false;
+
+      // Copy the properties over onto the new prototype
+      for (var name in prop) {
+        // Check if we're overwriting an existing function
+        prototype[name] = typeof prop[name] == "function" &&
+            typeof _super[name] == "function" && fnTest.test(prop[name]) ?
+            (((name, fn) => function(...args) {
               var tmp = this._super;
 
               // Add a new ._super() method that is the same method
@@ -55,33 +57,32 @@ THE SOFTWARE.
 
               // The method only need to be bound temporarily, so we
               // remove it when we're done executing
-              var ret = fn.apply(this, arguments);
+              var ret = fn.apply(this, args);
               this._super = tmp;
 
               return ret;
-            };
-          })(name, prop[name]) :
-          prop[name];
-    }
+            }))(name, prop[name]) :
+            prop[name];
+      }
 
-    // The dummy class constructor
-    function AnalyticsBase() {
-      // All construction is actually done in the init method
-      if (!initializing && this.init)
-        this.init.apply(this, arguments);
-    }
+      // The dummy class constructor
+      function AnalyticsBase(...args) {
+        // All construction is actually done in the init method
+        if (!initializing && this.init)
+          this.init(...args);
+      }
 
-    // Populate our constructed prototype object
-    AnalyticsBase.prototype = prototype;
+      // Populate our constructed prototype object
+      AnalyticsBase.prototype = prototype;
 
-    // Enforce the constructor to be what we expect
-    AnalyticsBase.constructor = AnalyticsBase;
+      // Enforce the constructor to be what we expect
+      AnalyticsBase.constructor = AnalyticsBase;
 
-    // And make this class extendable
-    AnalyticsBase.extend = arguments.callee;
+      // And make this class extendable
+      AnalyticsBase.extend = arguments.callee;
 
-    return AnalyticsBase;
-  };
+      return AnalyticsBase;
+    };
 })();
 
 var Analytics = AnalyticsBase.extend({
@@ -102,30 +103,30 @@ var Analytics = AnalyticsBase.extend({
 	enabled: true,
 	
 	//Constructor: var analytics = new Analytics('UA-XXXXXXX-X');
-	init: function(accountId){
+	init(accountId) {
 		this._accountId = accountId;
 		this._db = Titanium.Database.open('analytics');
 		this._initialize_db();
 	},
 	
 	//Main public methods
-	start: function(dispatchPeriod){
+	start(dispatchPeriod) {
 		if (this.enabled) {
 			this._startNewVisit();
 			this._httpClient = Titanium.Network.createHTTPClient();
 			
 			var context = this;
-			setInterval(function(){
+			setInterval(() => {
 				context._dispatchEvents();
 			}, dispatchPeriod * 1000);
 		}
 	},
 	
-	stop: function(){
+	stop() {
 		this.enabled = false;
 	},
 	
-	trackPageview: function(pageUrl){
+	trackPageview(pageUrl) {
 		
 		if (this._session && this.enabled) {
 					
@@ -133,18 +134,18 @@ var Analytics = AnalyticsBase.extend({
 		}
 	},
 	
-	trackEvent: function(category, action, label, value){
+	trackEvent(category, action, label, value) {
 		if (this._session && this.enabled) {
 			this._createEvent(category, action, label, value);
 		}
 	},
 	
-	reset:function(){
+	reset() {
 		Titanium.App.Properties.setString('analytics_session', null);	
 	},
 	
 	// Private methods
-	_initialize_db: function(){
+	_initialize_db() {
 	
 		this._db.execute('CREATE TABLE IF NOT EXISTS events (' +
 		'event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
@@ -167,7 +168,7 @@ var Analytics = AnalyticsBase.extend({
 	    rowCount.close();
 	},
 	
-	_startNewVisit: function(){
+	_startNewVisit() {
 		
 		var now = Math.round(new Date().getTime() / 1000);
 		if (!Titanium.App.Properties.hasProperty('analytics_session')) {
@@ -197,7 +198,7 @@ var Analytics = AnalyticsBase.extend({
 		
 	},
 	
-	_createEvent : function(category, action, label, value) {
+	_createEvent(category, action, label, value) {
 		
 		if(this._storedEvents >= 1000) {
 			Titanium.API.warn('Analytics: Store full, not storing last event');
@@ -210,7 +211,7 @@ var Analytics = AnalyticsBase.extend({
 		this._storedEvents++;
 	},
 	
-	_dispatchEvents : function() {
+	_dispatchEvents() {
 		
 		if(!this._dispatcherIsBusy && Titanium.Network.online){
 			
@@ -257,7 +258,7 @@ var Analytics = AnalyticsBase.extend({
 		}
 	},
 	
-	_constructRequestPath : function(event) {
+	_constructRequestPath(event) {
 		var path = new StringBuilder('/__utm.gif');
 		path.append('?utmwv=4.4mi');
 		path.append('&utmn=').append(event.random_val);

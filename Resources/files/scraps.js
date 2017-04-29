@@ -1,7 +1,7 @@
 			var base_offset = 0; //Set base to zero, hopefully the functions add or remove from it.................
-			more_button.addEventListener('click',function(e) {
+			more_button.addEventListener('click',e => {
   				actInd.show();
-					setTimeout(function() {
+					setTimeout(() => {
 						actInd.hide();
 					},1000);
 					function add_to_offset() {
@@ -15,9 +15,9 @@
 			feed_toolbar.add(more_button);
 			
 			//WHY DOES MINUS WORK BUT NOT PLUS?????
-			less_button.addEventListener('click',function(e) {
+			less_button.addEventListener('click',e => {
   				actInd.show();
-					setTimeout(function() {
+					setTimeout(() => {
 						actInd.hide();
 					},1000);
 					function remove_from_offset() {

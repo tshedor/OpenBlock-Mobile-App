@@ -52,11 +52,11 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	actInd.show();
 	
 	//Timeout only important on Android. Titanium showed iOS some favoritism (again) and the Indicator disappears after the feed is loaded automatically. For Android, the indicator is essentially a splash screen that disables use
-	setTimeout(function() { actInd.hide(); },2000);
+	setTimeout(() => { actInd.hide(); },2000);
 	win.add(actInd);
 	
 	//In case things go bad, just get that Indicator out of there and show a big 'ol NO MAPS FOR YOU
-	xhr.onerror = function() { 
+	xhr.onerror = () => { 
 		actInd.hide();         
 		var no_internet = Titanium.UI.createAlertDialog({
             title: 'No Internet Connection',
@@ -88,7 +88,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				var mrker = Titanium.Map.createAnnotation({
 					latitude:location[1],
 					longitude:location[0],
-					title:title,
+					title,
 					image:'../images/'+type+'.png',
 					animate:true,
 				});
@@ -234,7 +234,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
 			
 			//Settings button function        	
-            settings_button.addEventListener('click',function() {
+            settings_button.addEventListener('click',() => {
            		if(settings_view.left === '0') {
            			overlay.animate({opacity:0,duration:300});
            			settings_view.animate({left:'-'+settings_view_width,duration:300});
@@ -244,7 +244,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
            		}
            	});
            	
-           	settings_close.addEventListener('click',function() {
+           	settings_close.addEventListener('click',() => {
            		overlay.animate({opacity:0,delay:100,duration:300});
            		settings_view.animate({left:'-'+settings_view_width,duration:300});
            	});
@@ -309,7 +309,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				top:title_bar_height,
 			});
 			
-			settingsTable.addEventListener('click', function(e) {
+			settingsTable.addEventListener('click', e => {
 				overlay.animate({opacity:0,duration:300});
            		settings_view.animate({left:'-'+settings_view_width,duration:300});
 				if ((e.rowData.newwin) === 'true') {
@@ -320,7 +320,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				}
 				if ((e.rowData.heading) === 'REFRESH') {
 					actInd.show();
-						setTimeout(function() {
+						setTimeout(() => {
 							actInd.hide();
 						},1000);
                 	xhr.open("GET",feed);
@@ -353,7 +353,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				userLocation:true,
 				visible: true,
 				top:title_bar_height,
-				annotations:annotations,
+				annotations,
 				zoom:20,
 			});
 			Titanium.Geolocation.distanceFilter = 10;
@@ -363,13 +363,13 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			Titanium.Geolocation.distanceFilter = 10;
 
 			var feed_rows = Titanium.UI.createTableView({
-				data:data,
+				data,
 				minRowHeight:58,
 			});
 			
 /**********NEWSITEM MORE DETAIL VIEW*********/
 
-			feed_rows.addEventListener('click',function(e) {
+			feed_rows.addEventListener('click',e => {
 				var content_view = Titanium.UI.createView({ 
 					backgroundColor:'white',
 					right: -500,
@@ -392,7 +392,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					width:28
             	});
             	
-            	close_content.addEventListener('click',function() {
+            	close_content.addEventListener('click',() => {
             		content_view.animate({right:-500,duration:500});
             		heading_text.text = feed_view_name
             	});
@@ -419,7 +419,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			win.add(settings_view);
        		
    			function getLocation(){
-				Titanium.Geolocation.getCurrentPosition(function(e){
+				Titanium.Geolocation.getCurrentPosition(e => {
         			var region={
 						latitude: e.coords.latitude,
 						longitude: e.coords.longitude,
@@ -430,7 +430,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					mapview.setLocation(region);
 				});
 			}
- 			Titanium.Geolocation.addEventListener('location',function(){
+ 			Titanium.Geolocation.addEventListener('location',() => {
     			getLocation();
 			}); 
 		}
