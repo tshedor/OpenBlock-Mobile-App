@@ -123,7 +123,7 @@ var typeData = [
 	{ prettyName:'Accidents', hasChild:true, slug:'car-accidents', desc:'Drive safely. Every accident within the city limits is mapped', },
 ];
 
-Ti.Gesture.addEventListener('orientationchange', function() {
+Ti.Gesture.addEventListener('orientationchange', () => {
 	phone_width = Titanium.Platform.displayCaps.platformWidth;
 	reduced_phone_width = ((Titanium.Platform.displayCaps.platformWidth) - 20);
 });
@@ -160,11 +160,11 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	actInd.show();
 	
 	//Timeout only important on Android. Titanium showed iOS some favoritism (again) and the Indicator disappears after the feed is loaded automatically. For Android, the indicator is essentially a splash screen that disables use
-	setTimeout(function() { actInd.hide(); },5000);
+	setTimeout(() => { actInd.hide(); },5000);
 	win.add(actInd);
 	
 	//In case things go bad, just get that Indicator out of there and show a big 'ol NO MAPS FOR YOU
-	xhr.onerror = function() { 
+	xhr.onerror = () => { 
 		Titanium.API.log(xhr.onerror);
 		actInd.hide();         
 		var no_internet = Titanium.UI.createAlertDialog({
@@ -218,7 +218,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				var mrker = Titanium.Map.createAnnotation({
 					latitude:location[1],
 					longitude:location[0],
-					title:title,
+					title,
 					image:'images/map_icons/'+type+'.png',
 					animate:true,
 					leftButton:'images/map_icons/just_icons/'+type+'.png',
@@ -406,7 +406,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
 			
 			//Settings button function        	
-            settings_button.addEventListener('click',function() {
+            settings_button.addEventListener('click',() => {
            		//If settings_view is already there, then go ahead and get out of here
 				if(settings_view.left === '0') {
            			overlay.animate({opacity:0,duration:300});
@@ -420,14 +420,14 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
            		}
            	});
            	
-           	settings_close.addEventListener('click',function() {
+           	settings_close.addEventListener('click',() => {
            		overlay.visible = false;
            		overlay.animate({opacity:0,delay:100,duration:300});
            		settings_view.animate({left:'-'+settings_view_width,duration:300});
            	});
            	
            	//Log this so that we have better Android capabilities. The back button works just like the back arrow at the top.
-			settings_view.addEventListener('android:back',function() {
+			settings_view.addEventListener('android:back',() => {
            		overlay.visible = false;
            		overlay.animate({opacity:0,delay:100,duration:300});
            		settings_view.animate({left:'-'+settings_view_width,duration:300});			
@@ -549,7 +549,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				visible:false,
             });
             
-            typeClose.addEventListener('click', function() {
+            typeClose.addEventListener('click', () => {
             	type_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	typeClose.visible = false;
@@ -557,7 +557,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
 
            	//And again, adding Android functions
-			type_view.addEventListener('android:back',function() {
+			type_view.addEventListener('android:back',() => {
             	type_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	typeClose.visible = false;
@@ -589,9 +589,9 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			});
 			typeSave.add(typeSaveText);
             			
-			typeSave.addEventListener('click',function() {
+			typeSave.addEventListener('click',() => {
 				actInd.show();
-					setTimeout(function() {
+					setTimeout(() => {
 						actInd.hide();
 					},1000);
                 annotations = [];
@@ -611,7 +611,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				bottom:title_bar_height,
 			});
 			
-			typeTable.addEventListener('click',function(e) {
+			typeTable.addEventListener('click',e => {
 				if (Titanium.App.Properties.getString(e.rowData.slug) === 'hidden') {
 					Titanium.App.Properties.setString(e.rowData.slug, 'shown')
 					e.rowData.leftImage = 'images/shown.png'; //Changes to red to signify it's hidden
@@ -705,7 +705,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				visible:false,
             });
             
-            legendClose.addEventListener('click', function() {
+            legendClose.addEventListener('click', () => {
             	legend_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	legendClose.visible = false;
@@ -713,7 +713,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
             
             //ANDROID
-			legend_view.addEventListener('android:back',function() {
+			legend_view.addEventListener('android:back',() => {
             	legend_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	legendClose.visible = false;
@@ -748,7 +748,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				visible:false,
             });
             
-            submitClose.addEventListener('click', function() {
+            submitClose.addEventListener('click', () => {
             	submit_view.animate({left:'-'+double_phone_width,duration:300});
             	settings_close.visible = true;
             	submitClose.visible = false;
@@ -758,7 +758,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
             
             //DROID
-			submit_view.addEventListener('android:back',function() {
+			submit_view.addEventListener('android:back',() => {
             	submit_view.animate({left:'-'+double_phone_width,duration:300});
             	settings_close.visible = true;
             	submitClose.visible = false;
@@ -796,7 +796,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				visible:false,
             });
             
-            aboutClose.addEventListener('click', function() {
+            aboutClose.addEventListener('click', () => {
             	about_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	aboutClose.visible = false;
@@ -804,7 +804,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
             });
             
             //BACK ARROW FOR ANDROID
-			about_view.addEventListener('android:back',function() {
+			about_view.addEventListener('android:back',() => {
             	about_view.animate({left:'-'+type_view_width,duration:300});
             	settings_close.visible = true;
             	aboutClose.visible = false;
@@ -815,7 +815,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 
 /*****SETTINGS TABLE EVENT LISTNER*********/
 			
-			settingsTable.addEventListener('click', function(e) {
+			settingsTable.addEventListener('click', e => {
 				//Every row obeys the following three lines
 				overlay.animate({opacity:0,duration:300}); //Disappear overlay
            		settings_view.animate({left:'-'+settings_view_width,duration:300}); //Disappear settings view
@@ -842,7 +842,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				}
 				if ((e.rowData.heading) === 'Refresh') {
 					actInd.show();
-						setTimeout(function() {
+						setTimeout(() => {
 							actInd.hide();
 						},1000);
 					annotations = [];
@@ -880,7 +880,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 						dEmailMessage.toRecipients = ['tshedor@ku.edu']; //YOUR EMAIL HERE DONT FORGET
 						dEmailMessage.messageBody = 'Sent from the '+name+' Mobile App'; //Set body text so that when you get an email you know where it came from...unless the email user strips this text
 						//In case things go haywire...
-						dEmailMessage.addEventListener('complete',function(e) {
+						dEmailMessage.addEventListener('complete',e => {
     						if (e.result == demailDialog.SENT) {
         						alert("message was sent");
     						} else {
@@ -888,7 +888,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
     						}
 						});
 					dEmailMessage.open();		
-					dEmailMessage.addEventListener('open', function(e){
+					dEmailMessage.addEventListener('open', e => {
     					Titanium.App.Analytics.trackPageview('/feedback');
 					}); // I wanna now if people start an email and don't send it
   				}
@@ -932,7 +932,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 				userLocation:true,
 				visible: true,
 				top:title_bar_height,
-				annotations:annotations,
+				annotations,
 				zoom:20, //Don't know why this is here, but it can't hurt.
 			});
 			Titanium.Geolocation.distanceFilter = 10;
@@ -940,7 +940,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			//So here's the tricky part. They click on the icon. We can show the title on Android and a truncated title on iPhone, but that's it. So how about we make a map pin, click on the item, then click on the map_icon in the notation that appears above the icon. By clicking on that map_icon, the feed_view open up and the feed_rows is scrolled to. We're not going to create a separate view that has the full detail, because then we're generating way too much data from the feed into temporary variables. Once is enough.
 	
 			//I learned this from http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.Map-module and http://developer.appcelerator.com/question/126136/map-annotation-click-function--animation
-			mapview.addEventListener('click', function(evt) {
+			mapview.addEventListener('click', evt => {
                 // map event properties
                 var annotation = evt.annotation;
                 var title = evt.title;
@@ -960,7 +960,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 /********************************************/			
 
 			var feed_rows = Titanium.UI.createTableView({
-				data:data,
+				data,
 				minRowHeight:58,
 				backgroundColor:light_grey,
 				separatorColor:light_grey, //Cause we want to draw attention to the actual content. Thus content is a lighter color than the background and not the same.
@@ -968,7 +968,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			
 /**********NEWSITEM MORE DETAIL VIEW*********/
 
-			feed_rows.addEventListener('click',function(e) {
+			feed_rows.addEventListener('click',e => {
 
             	//Titanium.App.Analytics.trackPageview('/mobile-app/' + e.row.type + '/detail/' + e.row.news_id);
             	//And now, for a big 'ol cluster. CSS styles defined in the head. It's a WebView because you gotta make that HTML pretty somehow
@@ -1020,12 +1020,12 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 					top:default_close_from_top,
             	});
             	
-            	detail_close.addEventListener('click',function() {
+            	detail_close.addEventListener('click',() => {
                 	detail_window.close();
             	});
             	
             	//And the android:back button we've come to know and love again
-				detail_window.addEventListener('android:back',function() {
+				detail_window.addEventListener('android:back',() => {
                 	detail_window.close();
             		heading_text.text = feed_view_name;
             		settings_button.visible = true;
@@ -1075,7 +1075,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
        		
 			//Where you at????? http://developer.appcelerator.com/question/97671/geolocation-refreshing-to-current-location
    			function getLocation(){
-				Titanium.Geolocation.getCurrentPosition(function(e){
+				Titanium.Geolocation.getCurrentPosition(e => {
         			var region={
 						latitude: e.coords.latitude, //Standrad HTML5 getting location practice
 						longitude: e.coords.longitude,
@@ -1089,7 +1089,7 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 			
 			win.add(mapview); //Add dat map to the screen
  			
- 			Titanium.Geolocation.addEventListener('location',function(){
+ 			Titanium.Geolocation.addEventListener('location',() => {
     			getLocation();
 			}); 
 			
@@ -1145,7 +1145,7 @@ if(Ti.Android) {
         Cloud.Users.login({ //Going to create just a regular, default user, and they're going to collect all the device tokens. Each token is another subscriber, so it's not bending the rules, this just makes it easier for users so they don't have to create an account for the app/notifications
             login: 'test@example.com',
             password: 'example_password' //Create this user for Production AND Development under ACS Console > Manage > Users > Add User
-        }, function (e) {
+        }, e => {
             if (e.success) {
                 defaultSubscribe(); //See function below
             } else {
@@ -1159,7 +1159,7 @@ if(Ti.Android) {
         	channel: 'larryville_news',
         	device_token: deviceToken,
         	type: 'android' //A must, for whatever reason. Took me forever to figure this out, because it only throws an error when you install to device, not in the emulator. Type as a requirement is also not specified in the Titanium docs, just in their REST API/iOS SDK/Java SDK/JS SDK docs.
-        }, function (e) {
+        }, e => {
         	if (e.success) {
         		//alert('Subscribed');
         	} else {
@@ -1173,7 +1173,7 @@ if(Ti.Android) {
                 channel: 'larryville_news',
                 device_token: deviceToken,
         		type: 'android'
-            }, function (e) {
+            }, e => {
                 if (e.success) {
                     alert('Unsubscribed.');
                 } else {
@@ -1183,7 +1183,7 @@ if(Ti.Android) {
     }
  
  //The worst. This was a mountain of pain. So once we're all signed up, we've got to receive and parse the message. Moving on.
-	CloudPush.addEventListener('callback', function (evt) {
+	CloudPush.addEventListener('callback', evt => {
 		data = JSON.parse(evt.payload); //Your evt is total response text. We're going to just narrow this to the payload value, because I don't care about the rest. You can alert(evt) if you're so interested. Then we convert the JSON data into something readable.
 	
 		if(data.android.vibrate){ //if the vibrate property exists, then shake.
@@ -1209,10 +1209,10 @@ if(Ti.Android) {
     
     
     //Lastly, for debugging purposes
-    CloudPush.addEventListener('trayClickLaunchedApp', function (evt) {
+    CloudPush.addEventListener('trayClickLaunchedApp', evt => {
         Ti.API.info('Tray Click Launched App (app was not running)');
     });
-    CloudPush.addEventListener('trayClickFocusedApp', function (evt) {
+    CloudPush.addEventListener('trayClickFocusedApp', evt => {
         Ti.API.info('Tray Click Focused App (app was already running)');
     });
 }
@@ -1372,7 +1372,7 @@ if(Ti.Android) {
 				bottom:title_bar_height,
 			});
 			
-			prefTable.addEventListener('click',function(e) {
+			prefTable.addEventListener('click',e => {
 				if (Titanium.App.Properties.getString(e.rowData.slug) === 'hidden') {
 					Titanium.App.Properties.setString(e.rowData.slug, 'shown')
 					e.rowData.leftImage = 'images/shown.png'; //Changes to green check to show it's visible
@@ -1387,7 +1387,7 @@ if(Ti.Android) {
 			});
 			first_settings_window.add(prefTable);
             first_settings_window.open({modal:true});
-			save_bar.addEventListener('click',function() {
+			save_bar.addEventListener('click',() => {
 				Ti.App.Properties.setString("appLaunch5", JSON.stringify({opened:true})); //So we don't see this first prefences window again
 				//Ti.App.Properties.setString('GPSPref', 'yes'); Note: this is a preference I need to build in down the line
 				first_settings_window.close();
@@ -1409,7 +1409,7 @@ if(Ti.Android) {
 				buttonNames: ['OK', 'Remind Me', 'Never'],
 				cancel: 2
 			});
-			alertDialog.addEventListener('click', function(evt) {
+			alertDialog.addEventListener('click', evt => {
 				switch (evt.index) {
 					case 0:
 						Ti.App.Properties.setString('RemindToRate', Number.MAX_VALUE);
@@ -1442,21 +1442,21 @@ if(Ti.Android) {
 	// Call the next function if you want to reset the analytics to a new first time visit. This is useful for development only and should not go into a production app. analytics.reset();
 
 	// The analytics object functions must be called on app.js otherwise it will loose it's context
-	Titanium.App.addEventListener('analytics_trackPageview', function(e){
+	Titanium.App.addEventListener('analytics_trackPageview', e => {
 		analytics.trackPageview('/app' + e.pageUrl);
 	});
 
-	Titanium.App.addEventListener('analytics_trackEvent', function(e){
+	Titanium.App.addEventListener('analytics_trackEvent', e => {
 		analytics.trackEvent(e.category, e.action, e.label, e.value);
 	});
 
 	// I've set a global Analytics object to contain the two functions to make it easier to fire the analytics events from other windows
 	Titanium.App.Analytics = {
-		trackPageview:function(pageUrl){
-			Titanium.App.fireEvent('analytics_trackPageview', {pageUrl:pageUrl});
+		trackPageview(pageUrl) {
+			Titanium.App.fireEvent('analytics_trackPageview', {pageUrl});
 		},
-		trackEvent:function(category, action, label, value){
-			Titanium.App.fireEvent('analytics_trackEvent', {category:category, action:action, label:label, value:value});
+		trackEvent(category, action, label, value) {
+			Titanium.App.fireEvent('analytics_trackEvent', {category, action, label, value});
 		}
 	}
 
